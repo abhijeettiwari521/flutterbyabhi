@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/utils/routes.dart';
 
@@ -12,94 +11,120 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String name = "";
   bool changeButton = false;
+  final _formkey = GlobalKey<FormState>();
+
+  moveToHome(BuildContext context) async {
+    if (_formkey.currentState!.validate()) {}
+    setState(() {
+      changeButton = true;
+    });
+    await Future.delayed(Duration(seconds: 1));
+    await Navigator.pushNamed(context, MyRoutes.homeRoute);
+    setState(() {
+      changeButton = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Color.fromRGBO(255, 255, 255, 1),
+        color: Colors.white,
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Image.asset(
-                "assets/image/login.png",
-                fit: BoxFit.cover,
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Text(
-                "WELCOME $name",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 16.0, horizontal: 32.0),
-                child: Column(
-                  children: [
-                    TextFormField(
-                        decoration: InputDecoration(
-                          hintText: "Enter Username",
-                          labelText: "Username",
-                        ),
-                        onChanged: (Value) {
-                          name = Value;
-                          setState(() {});
-                        }),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: "Enter Password",
-                        labelText: "password",
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50.0,
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        setState(() {
-                          changeButton = true;
-                        });
-                        await Future.delayed(Duration(seconds: 1));
-                        Navigator.pushNamed(context, MyRoutes.homeRoute);
-                      },
-                      child: AnimatedContainer(
-                        duration: Duration(seconds: 1),
-                        width: changeButton ? 50 : 150,
-                        height: 50,
-                        alignment: Alignment.center,
-                        child: changeButton
-                            ? Icon(
-                                Icons.done,
-                                color: Colors.white,
-                              )
-                            : Text(
-                                "Login",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
-                              ),
-                        decoration: BoxDecoration(
-                            color: Colors.deepPurple,
-                            borderRadius:
-                                BorderRadius.circular(changeButton ? 50 : 8)),
-                      ),
-                    )
-                    //ElevatedButton(
-                    // child: Text("Login"),
-                    // style: TextButton.styleFrom(minimumSize: Size(150, 40)),
-                    // onPressed: () {
-
-                    // },
-                    // )
-                  ],
+          child: Form(
+            key: _formkey,
+            child: Column(
+              children: [
+                Image.asset(
+                  "assets/image/acc.png",
+                  fit: BoxFit.cover,
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 20.0,
+                ),
+                Text(
+                  "WELCOME $name",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 16.0, horizontal: 32.0),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Enter Username",
+                            labelText: "Username",
+                          ),
+                          validator: (String? Value) {
+                            if (Value!.isEmpty) {
+                              return "Please Enter Username ";
+                            }
+                            return null;
+                          },
+                          onChanged: (Value) {
+                            name = Value;
+                            setState(() {});
+                          }),
+                      TextFormField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: "Enter Password",
+                          labelText: "password",
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Password";
+                          } else if (value.length < 6) {
+                            return "Please Enter Password";
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        height: 50.0,
+                      ),
+                      Material(
+                        color: Colors.deepPurple,
+                        borderRadius:
+                            BorderRadius.circular(changeButton ? 50 : 8),
+                        child: InkWell(
+                          onTap: () => moveToHome(context),
+                          child: AnimatedContainer(
+                            duration: Duration(seconds: 1),
+                            width: changeButton ? 50 : 150,
+                            height: 50,
+                            alignment: Alignment.center,
+                            child: changeButton
+                                ? Icon(
+                                    Icons.done,
+                                    color: Colors.white,
+                                  )
+                                : Text(
+                                    "Login",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                          ),
+                        ),
+                      ),
+                      //ElevatedButton(
+                      // child: Text("Login"),
+                      // style: TextButton.styleFrom(minimumSize: Size(150, 40)),
+                      // onPressed: () {
+
+                      // },
+                      // )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ));
   }
