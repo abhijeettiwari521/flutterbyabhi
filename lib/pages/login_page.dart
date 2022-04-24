@@ -12,15 +12,32 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String name = "";
   bool changeButton = false;
+  final formkey = GlobalKey<FormState>();
+
+  moveToHome(BuildContext context) async {
+    if (formkey.currentState!.validate()) {
+      setState(() {
+        changeButton = true;
+      });
+      await Future.delayed(Duration(seconds: 1));
+      Navigator.pushNamed(context, MyRoutes.homeRoute);
+      setState(() {
+        changeButton = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Color.fromRGBO(255, 255, 255, 1),
-        child: SingleChildScrollView(
+      color: Colors.white,
+      child: SingleChildScrollView(
+        child: Form(
+          key: formkey,
           child: Column(
             children: [
               Image.asset(
-                "assets/image/login.png",
+                "assets/image/acc.png",
                 fit: BoxFit.cover,
               ),
               SizedBox(
@@ -39,32 +56,41 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     TextFormField(
-                        decoration: InputDecoration(
-                          hintText: "Enter Username",
-                          labelText: "Username",
-                        ),
-                        onChanged: (Value) {
-                          name = Value;
-                          setState(() {});
-                        }),
+                      decoration: InputDecoration(
+                        hintText: "Enter Username",
+                        labelText: "Username",
+                      ),
+                      validator: (Value) {
+                        if (Value!.isEmpty) {
+                          return "Please Enter Username";
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {
+                        name = value;
+                        setState(() {});
+                      },
+                    ),
                     TextFormField(
                       obscureText: true,
                       decoration: InputDecoration(
                         hintText: "Enter Password",
-                        labelText: "password",
+                        labelText: "Password",
                       ),
+                      validator: (Value) {
+                        if (Value!.isEmpty) {
+                          return "Please Enter Password";
+                        } else if (Value.length < 6) {
+                          return "Please Enter Six Digit Password";
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(
                       height: 50.0,
                     ),
                     InkWell(
-                      onTap: () async {
-                        setState(() {
-                          changeButton = true;
-                        });
-                        await Future.delayed(Duration(seconds: 1));
-                        Navigator.pushNamed(context, MyRoutes.homeRoute);
-                      },
+                      onTap: () => moveToHome(context),
                       child: AnimatedContainer(
                         duration: Duration(seconds: 1),
                         width: changeButton ? 50 : 150,
@@ -101,6 +127,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
