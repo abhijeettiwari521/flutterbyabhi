@@ -49,12 +49,28 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(
-              CupertinoIcons.control,
+              CupertinoIcons.flame,
+              color: Colors.white,
+            ),
+            title: Text(" Me",
+                textScaleFactor: 1.2, style: TextStyle(color: Colors.white)),
+          ),
+          ListTile(
+            leading: Icon(
+              CupertinoIcons.flag_circle_fill,
               color: Colors.white,
             ),
             title: Text("Show Me",
                 textScaleFactor: 1.2, style: TextStyle(color: Colors.white)),
-          )
+          ),
+          ListTile(
+            leading: Icon(
+              CupertinoIcons.info_circle_fill,
+              color: Colors.white,
+            ),
+            title: Text("About Us",
+                textScaleFactor: 1.2, style: TextStyle(color: Colors.white)),
+          ),
         ]),
       ),
     );
