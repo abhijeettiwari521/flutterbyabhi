@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/widgets/drawer.dart';
 
+//*day11 completed
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
   final int days = 1;
