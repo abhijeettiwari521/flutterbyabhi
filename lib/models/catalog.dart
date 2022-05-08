@@ -29,20 +29,20 @@ class Item {
 
   factory Item.fromMap(Map<String, dynamic> map) {
     return Item(
-      id: map["id"],
-      name: map["name"],
-      desc: map["desc"],
-      price: map["price"],
-      color: map["color"],
-      image: map["image"],
-    );
+        id: map["id"],
+        name: map["name"],
+        desc: map["desc"],
+        price: map["price"],
+        color: map["color"],
+        image: map["image"]);
   }
-  toMap() => {
+
+  tomap() => {
         "id": id,
         "name": name,
         "desc": desc,
         "price": price,
-        "color": color,
+        "color": Item,
         "image": image,
       };
 }
