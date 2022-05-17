@@ -4,6 +4,7 @@ import 'package:flutter_application_2/pages/home_detail_page.dart';
 import 'package:flutter_application_2/widgets/home_widgets/catalog_image.dart';
 import 'package:flutter_application_2/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:flutter_application_2/utils/routes.dart';
 
 class CatalogList extends StatelessWidget {
   @override
@@ -49,7 +50,7 @@ class CatalogItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              catalog.name.text.lg.color(MyTheme.darkBluishColor).bold.make(),
+              catalog.name.text.lg.color(context.accentColor).bold.make(),
               catalog.desc.text.lg.make(),
               10.heightBox,
               ButtonBar(
@@ -58,10 +59,11 @@ class CatalogItem extends StatelessWidget {
                 children: [
                   "\$${catalog.price}".text.bold.xl.make(),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          Navigator.pushNamed(context, MyRoutes.cartRoute),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                          MyTheme.darkBluishColor,
+                          context.theme.buttonColor,
                         ),
                         shape: MaterialStateProperty.all(
                           StadiumBorder(),
@@ -74,6 +76,6 @@ class CatalogItem extends StatelessWidget {
           ))
         ],
       ),
-    ).white.roundedLg.square(150).make().py16();
+    ).color(context.cardColor).roundedLg.square(150).make().py16();
   }
 }
