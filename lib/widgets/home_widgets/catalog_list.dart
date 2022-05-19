@@ -1,19 +1,22 @@
+// ignore_for_file: unnecessary_null_comparison, deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/models/catalog.dart';
 import 'package:flutter_application_2/pages/home_detail_page.dart';
 import 'package:flutter_application_2/widgets/home_widgets/catalog_image.dart';
-import 'package:flutter_application_2/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_application_2/utils/routes.dart';
 
 class CatalogList extends StatelessWidget {
+  const CatalogList({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: CatalogModel.items.length,
       itemBuilder: (context, index) {
-        final catalog = CatalogModel.items[index];
+        final catalog = CatalogModel.getByPosition(index);
         return InkWell(
           onTap: () => Navigator.push(
             context,
@@ -66,7 +69,7 @@ class CatalogItem extends StatelessWidget {
                           context.theme.buttonColor,
                         ),
                         shape: MaterialStateProperty.all(
-                          StadiumBorder(),
+                          const StadiumBorder(),
                         ),
                       ),
                       child: "Add".text.make())
