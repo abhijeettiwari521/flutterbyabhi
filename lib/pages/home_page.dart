@@ -4,11 +4,8 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:flutter_application_2/models/catalog.dart';
 import 'package:flutter_application_2/utils/routes.dart';
-import 'package:flutter_application_2/widgets/drawer.dart';
 import 'package:flutter_application_2/widgets/home_widgets/catalog_header.dart';
 import 'package:flutter_application_2/widgets/home_widgets/catalog_list.dart';
-import 'package:flutter_application_2/widgets/item_widget.dart';
-import 'package:flutter_application_2/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 //*day11 completed
@@ -29,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
     final catalogJson =
         await rootBundle.loadString("assets/files/catalog.json");
     final decodeData = jsonDecode(catalogJson);
@@ -46,8 +43,9 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: context.canvasColor,
         floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
+          // ignore: deprecated_member_use
           backgroundColor: context.theme.buttonColor,
-          child: Icon(CupertinoIcons.cart, color: Colors.white),
+          child: const Icon(CupertinoIcons.cart, color: Colors.white),
         ),
         body: SafeArea(
           child: Container(
@@ -55,11 +53,13 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CatalogHeader(),
+                const CatalogHeader(),
+                // ignore: unnecessary_null_comparison
                 if (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+                  // ignore: prefer_const_constructors
                   CatalogList().py16().expand()
                 else
-                  CircularProgressIndicator().centered().expand(),
+                  const CircularProgressIndicator().centered().expand(),
               ],
             ),
           ),

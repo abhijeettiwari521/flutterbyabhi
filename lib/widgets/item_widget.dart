@@ -5,15 +5,18 @@ class ItemWidget extends StatelessWidget {
   final Item item;
 
   const ItemWidget({Key? key, required this.item})
+      // ignore: unnecessary_null_comparison
       : assert(item != null),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      // ignore: prefer_const_constructors
       shape: StadiumBorder(),
       child: ListTile(
         onTap: () {
+          // ignore: avoid_print
           print("${item.name} pressed");
         },
         leading: Image.network(item.image),
@@ -22,6 +25,7 @@ class ItemWidget extends StatelessWidget {
         trailing: Text(
           "\$${item.price}",
           textScaleFactor: 1.5,
+          // ignore: prefer_const_constructors
           style: TextStyle(
             color: Colors.deepPurple,
             fontWeight: FontWeight.bold,

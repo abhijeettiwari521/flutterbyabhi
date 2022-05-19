@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/models/catalog.dart';
-import 'package:flutter_application_2/widgets/themes.dart';
+import 'package:flutter_application_2/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeDetailPage extends StatelessWidget {
   final Item catalog;
 
   const HomeDetailPage({Key? key, required this.catalog})
-      : assert(catalog != null),
+      :
+        // ignore: unnecessary_null_comparison
+        assert(catalog != null),
         super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -24,13 +26,15 @@ class HomeDetailPage extends StatelessWidget {
           children: [
             "\$${catalog.price}".text.bold.xl4.red800.make(),
             ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                        Navigator.pushNamed(context, MyRoutes.cartRoute),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
+                        // ignore: deprecated_member_use
                         context.theme.buttonColor,
                       ),
                       shape: MaterialStateProperty.all(
-                        StadiumBorder(),
+                        const StadiumBorder(),
                       ),
                     ),
                     child: "Add to Cart".text.make())

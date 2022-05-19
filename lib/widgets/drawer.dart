@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,10 +11,11 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       child: Container(
         color: Colors.deepPurple,
+        // ignore: duplicate_ignore, prefer_const_literals_to_create_immutables
         child: ListView(padding: EdgeInsets.zero, children: [
           DrawerHeader(
             padding: EdgeInsets.zero,
-            child: UserAccountsDrawerHeader(
+            child: const UserAccountsDrawerHeader(
               margin: EdgeInsets.zero,
               accountName: Text("Abhijeet Tiwari",
                   style: TextStyle(color: Colors.white)),
