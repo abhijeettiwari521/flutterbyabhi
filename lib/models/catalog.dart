@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_renaming_method_parameters
+
 import 'dart:convert';
 
 class CatalogModel {
@@ -5,6 +7,7 @@ class CatalogModel {
 
   //Get item by id
   static Item getById(int id) =>
+      // ignore: null_closures
       items.firstWhere((element) => element.id == id, orElse: null);
 
   // Get Item by position
@@ -58,7 +61,7 @@ class Item {
   }
 
   factory Item.fromMap(Map<String, dynamic> map) {
-    // ignore: unnecessary_null_comparison
+    // ignore: unnecessary_null_comparison, empty_statements
     if (map == null) ;
 
     return Item(
