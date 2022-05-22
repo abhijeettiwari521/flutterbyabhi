@@ -1,8 +1,12 @@
-import 'dart:ffi';
+// ignore_for_file: unnecessary_null_comparison
 
 import 'package:flutter_application_2/models/catalog.dart';
 
 class CartModel {
+  // ignore: non_constant_identifier_names
+  static final cartModel = CartModel._internal();
+  CartModel._internal();
+  factory CartModel() => cartModel;
   //catalog field
   late CatalogModel _catalog;
 //collection of Ids - store Ids of each item
