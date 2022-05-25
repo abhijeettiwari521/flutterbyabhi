@@ -40,7 +40,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   velocity_x: ^3.4.0
-
+  vxstate: any
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
